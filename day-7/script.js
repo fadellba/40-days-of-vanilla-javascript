@@ -36,7 +36,7 @@ function rps() {
     console.log("We don't understand your input.");
   }
 
-  const response = prompt("Do you want play again?")
+  const response = prompt("Do you want play again?(yes|no)")
     .trim()
     .toLowerCase();
   const playAgain = response ? response : "no";
@@ -74,7 +74,7 @@ function secretNumberGuessing() {
   );
   console.log("After " + count + " input");
 
-  const response = prompt("Do you want play again?")
+  const response = prompt("Do you want play again?(yes|no)")
     .trim()
     .toLowerCase();
   const playAgain = response ? response : "no";
