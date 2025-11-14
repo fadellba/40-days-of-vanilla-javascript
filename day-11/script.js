@@ -1,29 +1,30 @@
 //1. What will be the output of the following code and why?
-// function outer() {
-//   let count = 0;
-//   return function inner() {
-//     count++;
-//     console.log(count);
-//   };
-// }
-// const counter = outer();
-// counter(); // 1
-// counter(); // 2
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+const counterr = outer();
+counterr(); // 1
+counterr(); // 2
 // Explanation:
-// The `inner` function forms a "closure" with the scope of the `outer` function.
+// The `inner` function forms a "closure" with 
+// the scope of the `outer` function.
 
 // Thanks to this closure, `inner` retains access to the `count` variable even after
 // `outer` has finished executing. Each time `counter` is called (which is a reference to `inner`),
 // the same `count` variable is modified, thus preserving its state between calls.
 
 //2. What will be the output and why?
-// function testClosure() {
-//   let x = 10;
-//   return function () {
-//     return x * x;
-//   };
-// }
-// console.log(testClosure()());
+function testClosure() {
+  let x = 10;
+  return function () {
+    return x * x;
+  };
+}
+console.log(testClosure()());
 // The output will be 100.
 // 1. `testClosure()` is called and returns the inner anonymous function.
 // 2. This returned function maintains a closure over the scope of `testClosure`,
@@ -31,18 +32,21 @@
 // 3. The second pair of parentheses `()` immediately invokes the returned function.
 // 4. The inner function calculates `x * x` (10 * 10) and returns 100.
 
-//3. Create a button dynamically and attach a click event handler using a closure. The handler should count and log how many times the button was clicked.
-// function timer() {
-//   let count = 0;
-//     document.
-//         getElementById("btn").
-//         addEventListener("click", () => {
-//     count++;
-//     console.log(count);
-//   });
-// }
+//3. Create a button dynamically and attach a 
+// click event handler using a closure. 
+// The handler should count and log how many times 
+// the button was clicked.
+function timer() {
+  let count = 0;
+    document.
+        getElementById("btn").
+        addEventListener("click", () => {
+    count++;
+    console.log(count);
+  });
+}
 
-// timer();
+timer();
 
 //4. Write a function createMultiplier(multiplier) that returns another function to multiply numbers.
 function createMultiplier(multiplier) {
