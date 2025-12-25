@@ -36,8 +36,8 @@ parent();
 //4. Use a loop inside a function and declare a variable inside the loop. Can you access it outside?
 function myFunc() {
   for (let i = 0; i < 10; i++) {
-    let varInsideLoop = i; // ReferenceError
-    //var varInsideLoop = i; // 9
+    //let varInsideLoop = i; // ReferenceError
+    var varInsideLoop = i; // 9
   }
   console.log(varInsideLoop);
 }
@@ -55,9 +55,10 @@ function outer() {
 outer();
 
 {
-    console.log(a);// RefferenceError
-                    //  because we are in tdz of a
-    let a = 10;
+    console.log(a);// if let RefferenceError because we are in tdz of a if var undefined
+
+  //var a = 10; 
+  let a = 10; 
 }
 
 //7. Where is the age variable accessible?
@@ -95,8 +96,7 @@ function outer() {
 
   function inner() {
     let x = "Inner";
-      console.log(x);// Inner, because x is defined in
-      //inner()
+      console.log(x);// Inner, because x is defined lexically in inner()
   }
 
   inner();

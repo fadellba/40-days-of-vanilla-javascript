@@ -24,7 +24,7 @@ const {
   name: personName,
   company: {
     name: companyName,
-    location: { city },
+    location: { city: city },
   },
 } = person1;
 
@@ -160,13 +160,13 @@ console.log(carEntries); // Output: [ [ 'make', 'Toyota' ], [ 'model', 'Camry' ]
 //7. How do you check if an object
 // has a certain property?
 
-// we can if an object
+// we can check if an object
 // has a certain property
 // with in operator
 const hasProperty = "make" in car ? true : false;
 console.log(hasProperty);
 
-// we can if an object
+// we can check if an object
 // has a certain property
 // with methode hasOwn
 console.log(Object.hasOwn(car,"mak"));
