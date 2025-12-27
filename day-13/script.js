@@ -143,3 +143,5 @@ personn.sayHello();// Charlie because in js when this is defined in standalone
 personn.sayHelloArrow();//empty string doesn mean undefined because
 //the this value of the enclosing lexical context of this is the global object
 // then name is not defined
+
+//Option C: "Charlie" and "" (empty string)
