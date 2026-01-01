@@ -140,7 +140,7 @@ const personn = {
 personn.sayHello();// Charlie because in js when this is defined in standalone
 //function witch is a propertie of an object it will refer to the object where 
 // the function is defined 
-personn.sayHelloArrow();//empty string doesn mean undefined because
+personn.sayHelloArrow();//empty string doesn mean undefined becaus
 //the this value of the enclosing lexical context of this is the global object
 // then name is not defined
 

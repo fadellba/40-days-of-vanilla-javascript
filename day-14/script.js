@@ -146,10 +146,10 @@ function parseJson(str) {
 // rethrow      |      If you catch an error in a catch but
 //              |       don't know how to handle it, you can
 //              |       "re-throw" it so that a higher-level
-//              |       try...catch block takes care of it.
+//              |       try...catch block.
 //              |
 // error object |      When an error occurs, 
 //              |       JavaScript generates an object 
 //              |       containing the details. 
 //              |      This object typically has 
-//              |      two properties
+//              |      three properties name, message and stack.
