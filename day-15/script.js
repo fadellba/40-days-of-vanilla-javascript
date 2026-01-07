@@ -283,59 +283,170 @@ const fehrsl = employees.find((emp) => targetIds.includes(emp.departmentId));
 console.log(fehrsl);
 
 //T-034: Verify if all employees belong to a department listed in the departments array.
-const isAllEmpInDeptList = employees.some((emp) => {
-  departments.find((d) => d.id === emp.departmentId);
-});
+const isAllEmpInDeptList = employees.every((emp) =>
+  departments.find((d) => d.id === emp.departmentId)
+);
 console.log(isAllEmpInDeptList);
 
-/* 
 
- T-035: Log each employee's name and department name to the console.
+//T-035: Log each employee's name and department name to the console.
+employees.map((emp) => {
+  const dept = departments.find((d) => d.id === emp.departmentId);
+  console.log(`Emp : ${emp.name} Service : ${dept.name}`);
+});
 
- T-036: Extract all employee names into a single array.
+//T-036: Extract all employee names into a single array.
+{
+  const empsName = employees.map((emp) => emp.name);
+  console.log(empsName);
+}
 
- T-037: Increment each employee's salary by 10%
+//T-037: Increment each employee's salary by 10%
+const primes = employees.map((emp) => {
+  emp.salary = emp.salary + (emp.salary * (10 / 100));
+  return emp;
+});
+console.log(primes)
 
- T-038: Assume each employee can have multiple skills. Create an array of employee skills and flatten them. Example: [{name: "Alice", skills: ["Excel", "Management"]}, ...].
+  // T-038: Assume each employee can have multiple skills.
+  //  Create an array of employee skills and flatten them.
+//  Example: [{name: "Alice", skills: ["Excel", "Management"]}, ...].
 
- T-039: Find the total salary of all employees working in the "Engineering" department.
+const employeesWithSkills = [
+  { name: "Alice", skills: ["Excel", "Management"] },
+  { name: "Bob", skills: ["Python", "Data Analysis"] },
+  { name: "Charlie", skills: ["HTML", "CSS", "JavaScript"] },
+];
 
- T-040: Check if there is any department where all employees earn more than 5000.
+const allSkills = employeesWithSkills.flatMap((emp) => emp.skills);
+console.log(allSkills);
 
- T-041: Assume each employee has a projects array (e.g., { id: 1, name: "Alice", projects: ["Project A", "Project B"] }). Find the total number of unique projects being handled across all employees.
+//T-039: Find the total salary of all employees working in the "Engineering" department.
+const t039 = employees.reduce((total, emp) => {
+  if (emp.departmentId === engineeringDept?.id) {
+   total = total + emp.salary;
+  }
+  return total;
+}, 0);
+console.log(t039); 
 
- T-042: For each employee, find their department name and return an array of employee names with their department names.
+//T-040: Check if there is any department where all employees earn more than 5000.
+const t040 = departments.some((dept) => {
+  const emp = employees.find((e) => e.departmentId === dept.id);
+  return emp.salary > 5000
+});
+console.log(t040)
 
- T-043: Get a list of names of employees earning more than 6000.
+//T-041: Assume each employee has a projects array (e.g., { id: 1, name: "Alice", projects: ["Project A", "Project B"] }). Find the total number of unique projects being handled across all employees.
+// const employeesWithProject = [
+//   { id: 1, name: "Alice", projects: ["Project A", "Project B"] },
+//   { id: 2, name: "Bob", projects: ["Project A", "Project c"] },
+//   { id: 3, name: "Charlie", projects: ["Project A", "Project D"] },
+// ];
 
- T-044: Write a for-of loop to print the names of all employees from the employees array.
+// const t041 = employeesWithProject.reduce((total, emp) => {
+//   const e = emp.flatMap()
+// })
 
- T-045: Using a for-of loop, print the names of employees earning more than 5000.
+//T-042: For each employee,
+// find their department name and return an array of employee names with their department names.
+const empsWDeptNames = employees.flatMap((emp) => {
+  const dept = departments.find((d) => d.id === emp.departmentId);
+  return [dept.name];
+});
+console.log(empsWDeptNames);
 
- T-046: Modify the for-of loop to destructure each employee object and log their name and salary.
+//T-043: Get a list of names of employees earning more than 6000.
+const empSalGt6000 = employees.filter((emp) => emp.salary > 6000);
+const t043 = empSalGt6000.map((emp) => emp.name);
+console.log(t043);
 
- T-047: Write a for-of loop to match employees with their departments and print the results.
+//T-044: Write a for-of loop to print the names of all
+// employees from the employees array.
+for (let e of employees) {
+  console.log(e.name);
+}
 
- T-048: Use Array.prototype.entries() with a for-of loop to print the index and name of each employee.
+//T-045: Using a for-of loop, print the names of employees
+// earning more than 5000.
+console.log("------------");
+for (let e of employees) {
+  if(e.salary > 5000)
+    console.log(e.name);
+}
 
- T-049: Given the array-like object below, access the second element and log it:
+//T-046: Modify the for-of loop to destructure each employee object
+// and log their name and salary.
+console.log("------------");
+for (let e of employees) {
+  let { name, salary } = e;
+  console.log(`Name: ${name}, Salary: ${salary}`);
+}
 
+//T-047: Write a for-of loop to match employees with their
+// departments and print the results.
+console.log("------------");
+for (let e of employees) {
+  for (let d of departments) {
+    if (e.departmentId === d.id) {
+      console.log(e.name + " " + d.name);
+      break;
+    }
+  }
+}
+
+//T-048: Use Array.prototype.entries() with a for-of loop
+// to print the index and name of each employee.
+const t048 = employees.entries();
+for (const [i, e] of t048) {
+  console.log(i + " " + e.name);
+}
+
+//T-049: Given the array-like object below, 
+// access the second element and log it:
 const arrayLike = { 0: "First", 1: "Second", length: 2 };
- T-050: Write a function that takes a variable number of arguments and converts the arguments object into a real array using Array.from.
+console.log(arrayLike[1]);
 
- T-051: Write a snippet to select all div elements on a webpage (using document.querySelectorAll) and convert the resulting NodeList into an array.
+//T-050: Write a function that takes a variable number of arguments
+// and converts the arguments object into a real array using Array.from.
+function toArray() {
+  const arr = Array.from(arguments);
+  console.log(arr);
+}
 
- T-052: Merge these two arrays into a single array:
+toArray(arrayLike);
 
+//T-051: Write a snippet to select all div elements on a webpage
+// (using document.querySelectorAll) and convert the resulting NodeList
+// into an array.
+const elmts = document.querySelectorAll('div');
+console.log(elmts);
+console.log([...elmts]);
+
+//T-052: Merge these two arrays into a single array:
 const arr1 = [1, 2];
 const arr2 = [3, 4];
- T-053: Create an array of n duplicate values using Array.from. Input: Create an array with 5 "A" values. Output: ["A", "A", "A", "A", "A"]
+const merge = [...arr1, ...arr2];
+console.log(merge);
 
- T-054: Use Array.from to convert a string like "Hello" into an array of characters.
+//T-053: Create an array of n duplicate values using Array.from.
+//Input: Create an array with 5 "A" values. Output: ["A", "A", "A", "A", "A"]
 
- T-055: For the array, ['apple', 'banana', 'apricot', 'mango', 'blueberry'], group words by their first letter using group().
 
- T-057: From this array [3, 7, 3, 2, 3, 8, 7, 7], find the most repeated number. Hint: Use array method.
+//T-054: Use Array.from to convert a string like "Hello" into an array of characters.
+console.log(Array.from("hello"));
+
+//T-055: For the array, ['apple', 'banana', 'apricot', 'mango', 'blueberry'],
+// group words by their first letter using group().
+
+const rslt = Object.groupBy(["apple", "banana", "apricot", "mango", "blueberry"],(elm) => elm.charAt(0));
+console.log(rslt);
+
+//T-057: From this array ,
+// find the most repeated number. Hint: Use array method.
+const counter = [3, 7, 3, 2, 3, 8, 7, 7].for;
+
+/*
 
  T-058: Find the median of [5, 2, 9, 1, 3, 6, 8].
 
