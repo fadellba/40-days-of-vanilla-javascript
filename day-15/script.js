@@ -332,27 +332,26 @@ console.log(t039);
 
 //T-040: Check if there is any department where all employees earn more than 5000.
 const t040 = departments.some((dept) => {
-  const emp = employees.find((e) => e.departmentId === dept.id);
-  return emp.salary > 5000
+  const deptEmps = employees.filter((e) => e.departmentId === dept.id);
+  return deptEmps.length > 0 && deptEmps.every((e) => e.salary > 5000);
 });
 console.log(t040)
 
 //T-041: Assume each employee has a projects array (e.g., { id: 1, name: "Alice", projects: ["Project A", "Project B"] }). Find the total number of unique projects being handled across all employees.
-// const employeesWithProject = [
-//   { id: 1, name: "Alice", projects: ["Project A", "Project B"] },
-//   { id: 2, name: "Bob", projects: ["Project A", "Project c"] },
-//   { id: 3, name: "Charlie", projects: ["Project A", "Project D"] },
-// ];
+const employeesWithProject = [
+  { id: 1, name: "Alice", projects: ["Project A", "Project B"] },
+  { id: 2, name: "Bob", projects: ["Project A", "Project C"] },
+  { id: 3, name: "Charlie", projects: ["Project A", "Project D"] },
+];
 
-// const t041 = employeesWithProject.reduce((total, emp) => {
-//   const e = emp.flatMap()
-// })
+const uniqueProjects = new Set(employeesWithProject.flatMap((emp) => emp.projects));
+console.log(uniqueProjects.size);
 
 //T-042: For each employee,
 // find their department name and return an array of employee names with their department names.
-const empsWDeptNames = employees.flatMap((emp) => {
+const empsWDeptNames = employees.map((emp) => {
   const dept = departments.find((d) => d.id === emp.departmentId);
-  return [dept.name];
+  return { name: emp.name, department: dept?.name };
 });
 console.log(empsWDeptNames);
 
@@ -431,7 +430,8 @@ console.log(merge);
 
 //T-053: Create an array of n duplicate values using Array.from.
 //Input: Create an array with 5 "A" values. Output: ["A", "A", "A", "A", "A"]
-
+const duplicateAs = Array.from({ length: 5 }, () => "A");
+console.log(duplicateAs);
 
 //T-054: Use Array.from to convert a string like "Hello" into an array of characters.
 console.log(Array.from("hello"));
@@ -444,32 +444,64 @@ console.log(rslt);
 
 //T-057: From this array ,
 // find the most repeated number. Hint: Use array method.
-const counter = [3, 7, 3, 2, 3, 8, 7, 7].for;
+const arr = [3, 7, 3, 2, 3, 8, 7, 7];
+const counts = arr.reduce((acc, num) => {
+  acc[num] = (acc[num] || 0) + 1;
+  return acc;
+}, {});
+const mostRepeated = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+console.log(Number(mostRepeated));
 
-/*
+//T-058: Find the median of [5, 2, 9, 1, 3, 6, 8].
+const nums = [5, 2, 9, 1, 3, 6, 8].sort((a, b) => a - b);
+const mid = Math.floor(nums.length / 2);
+const median = nums.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+console.log(median);
 
- T-058: Find the median of [5, 2, 9, 1, 3, 6, 8].
+//T-059: Convert this array
+// [['a', 1], ['b', 2], ['c', 3]], into { a: 1, b: 2, c: 3 }
+// using array method(s).
+const entries = [['a', 1], ['b', 2], ['c', 3]];
+console.log(Object.fromEntries(entries));
 
- T-059: Convert this array [['a', 1], ['b', 2], ['c', 3]], into { a: 1, b: 2, c: 3 } using array method(s).
+//T-060: Flatten and convert all letters to uppercase in one step using flatMap(). Here is input array: [['a', 'b'], ['c', 'd']].
 
- T-060: Flatten and convert all letters to uppercase in one step using flatMap(). Here is input array: [['a', 'b'], ['c', 'd']].
+const input60 = [['a', 'b'], ['c', 'd']];
+console.log(input60.flatMap(sub => sub.map(l => l.toUpperCase())));
 
- T-061: Count the occurrences of each fruit in this array: ['apple', 'banana', 'apple', 'mango', 'banana', 'banana']
+// T-061: Count the occurrences of each fruit in this array: ['apple', 'banana', 'apple', 'mango', 'banana', 'banana']
+const fruits61 = ['apple', 'banana', 'apple', 'mango', 'banana', 'banana'];
+const fruitCounts = fruits61.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {});
+console.log(fruitCounts);
 
- T-062: Extract extract [‘b’, ‘c’, ‘d’] using slice() from this array: ['a', 'b', 'c', 'd', 'e']
+// T-062: Extract extract [‘b’, ‘c’, ‘d’] using slice() from this array: ['a', 'b', 'c', 'd', 'e']
+console.log(['a', 'b', 'c', 'd', 'e'].slice(1, 4));
 
- T-063: Sort the array [9, 3, 1, 6, 8] in ascending order using toSorted()
+// T-063: Sort the array [9, 3, 1, 6, 8] in ascending order using toSorted()
+console.log([9, 3, 1, 6, 8].toSorted((a, b) => a - b));
 
- T-064: Reverse [1, 2, 3, 4, 5] using toReversed() and compare it with reverse()
+// T-064: Reverse [1, 2, 3, 4, 5] using toReversed() and compare it with reverse()
+const arr64 = [1, 2, 3, 4, 5];
+console.log(arr64.toReversed());
+console.log(arr64); // Original is unchanged
 
- T-065: Group the follwing array elements based on age(Adult vs Non-Adult):
-
+// T-065: Group the follwing array elements based on age(Adult vs Non-Adult):
 const users = [
   { name: 'Alice', age: 55 },
   { name: 'Bob', age: 3 },
   { name: 'Charlie', age: 25 },
 ];
- T-066: Find the longest word in this sentence using Array and Array methods: "40 Days of JavaScript by tapaScript is a powerful initiative".
- T-067: Find common elements between two arrays, [1, 2, 3, 4], [3, 4, 5, 6]
+console.log(Object.groupBy(users, user => user.age >= 18 ? 'Adult' : 'Non-Adult'));
 
-*/
+// T-066: Find the longest word in this sentence using Array and Array methods: "40 Days of JavaScript by tapaScript is a powerful initiative".
+const sentence = "40 Days of JavaScript by tapaScript is a powerful initiative";
+const longestWord = sentence.split(' ').reduce((longest, current) => current.length > longest.length ? current : longest, "");
+console.log(longestWord);
+
+// T-067: Find common elements between two arrays, [1, 2, 3, 4], [3, 4, 5, 6]
+const arrA = [1, 2, 3, 4];
+const arrB = [3, 4, 5, 6];
+console.log(arrA.filter(item => arrB.includes(item)));
