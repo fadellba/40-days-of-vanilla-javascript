@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="logic.js"></script>
+    <link rel="stylesheet" href="ui.css">
+  </head>
+  <body>
+    <input placeholder="write some thing to add..." id="input" type="text">
+    <button onclick="addTask()">Add</button>
+    <input placeholder="filter..." onkeyup="filter()" id="search-input" type="search">
+    <ol id="tasks-list"></ol>
+  </body>
+</html>

@@ -2,30 +2,33 @@ function findMostFreqWord() {
   const elm = document.getElementById("text");
   let sentence = elm.textContent;
   const arr = sentence.replaceAll(".", "").split(" ");
+
   const occ = arr.reduce((apparence, word) => {
     apparence[word] = (apparence[word] || 0) + 1;
     return apparence;
   }, {});
-    const mostRepeated = Object.keys(occ).reduce((a, b) =>
-      occ[a] > occ[b] ? a : b
-    );
-    console.log(mostRepeated);
-    console.log(occ[mostRepeated]);
+    
+  const mostRepeated = Object.keys(occ).reduce((a, b) =>
+    occ[a] > occ[b] ? a : b
+  );
+
+  console.log(mostRepeated);
+  console.log(occ[mostRepeated]);
 }
 
 findMostFreqWord();
 
 function zebraColor() {
-    const list = document.querySelectorAll('ul#cars li');
-    [...list].forEach((li) => {
-        if ([...list].indexOf(li) % 2 === 0) {
-            li.style.backgroundColor = "white";
-            li.style.color = "black";
-        } else {
-            li.style.backgroundColor = "black";
-            li.style.color = "white";
-        }
-    })
+  const list = document.querySelectorAll("ul#cars li");
+  [...list].forEach((li) => {
+    if ([...list].indexOf(li) % 2 === 0) {
+      li.style.backgroundColor = "white";
+      li.style.color = "black";
+    } else {
+      li.style.backgroundColor = "black";
+      li.style.color = "white";
+    }
+  });
 }
 
 zebraColor();
@@ -41,16 +44,16 @@ querySelectorAll	Uses CSS selector syntax to return all matching elements. retur
 */
 
 function replaceText(myText) {
-    const p = document.querySelector('.myText');
-    const text = p.textContent;
-    p.textContent = text.replaceAll("apple", "mengos");
+  const p = document.querySelector(".myText");
+  const text = p.textContent;
+  p.textContent = text.replaceAll("apple", "mengos");
 }
 
 replaceText();
 
 function countUniqueLinks() {
-    const links = document.querySelectorAll('a');
-    console.log(links.length);
+  const links = document.querySelectorAll("a");
+  console.log(links.length);
 }
 
 countUniqueLinks();
